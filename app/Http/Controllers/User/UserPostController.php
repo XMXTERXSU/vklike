@@ -10,7 +10,7 @@ class UserPostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $post = (object) [
             'id' => 123,
@@ -26,8 +26,10 @@ class UserPostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+
+
         return view('user.posts.create');
     }
 
@@ -36,7 +38,11 @@ class UserPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        dd($data);
+
+        return "Запрос на создание поста";
     }
 
     /**
@@ -72,7 +78,9 @@ class UserPostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+
+        dd($data);
     }
 
     /**

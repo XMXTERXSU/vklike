@@ -6,6 +6,9 @@
     <x-title>
         {{ __('Список постов') }}
     </x-title>
+
+    @include('post.filter')
+
     @if (empty($posts))
         {{ __('Здесь еще нет постов') }}
     @else
