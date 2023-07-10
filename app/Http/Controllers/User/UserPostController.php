@@ -38,11 +38,11 @@ class UserPostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
 
-        dd($data);
+        // dd($data);
 
-        return "Запрос на создание поста";
+        return redirect()->route('user.posts.show', 123);
     }
 
     /**
@@ -78,9 +78,13 @@ class UserPostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->all();
+        $title = $request->input('title');
+        $content = $request->input('content');
 
-        dd($data);
+        // dd($data);
+
+
+        return redirect()-back();
     }
 
     /**
@@ -88,6 +92,6 @@ class UserPostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return redirect()-route('user.posts.index');
     }
 }

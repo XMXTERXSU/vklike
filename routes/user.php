@@ -16,7 +16,7 @@ use App\Http\Controllers\User\UserPostController;
 */
 
 Route::prefix('user')->middleware(['active'])->group(function () {
-    Route::redirect('/', 'posts')->name('user');
+    Route::redirect('/', '/user/posts')->name('user');
     Route::resource('posts', UserPostController::class, ['as' => 'user']);
     Route::post('like', [UserPostController::class, 'like'])->name('user.like');
 });

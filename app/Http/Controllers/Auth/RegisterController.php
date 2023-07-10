@@ -11,12 +11,17 @@ class RegisterController extends Controller
     {
         return view('register.index');
     }
+
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
 
-        dd($data);
+        // dd($data);
 
-        return "Запрос на регистрацию";
+        if (true) {
+            return redirect()->back()->withInput();
+        }
+
+        // return redirect()->route('user');
     }
 }

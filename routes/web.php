@@ -20,11 +20,11 @@ use App\Http\Controllers\Comment\CommentController;
 
 Route::view('/', 'home.index')->name('home');
 
-Route::resource('/posts', PostController::class);
+Route::resource('/posts', PostController::class)->only(['index', 'show']);
 
 // Route::resource('/post/{post}/comments', CommentController::class)->name('comments');
 
-Route::get('/test', TestController::class)->name('test')->middleware('token');
+Route::get('/test', TestController::class)->name('test');
 
 Route::middleware('guest')->group(function (){
     Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');

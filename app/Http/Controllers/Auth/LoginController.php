@@ -11,11 +11,14 @@ class LoginController extends Controller
         return view('login.index');
     }
     public function store(Request $request){
-        $ip = $request->ip();
-        $path = $request->path();
-        $url = $request->url();
+        // $ip = $request->ip();
+        // $path = $request->path();
+        // $url = $request->url();
 
+        if (true) {
+            return redirect()->back()->withInput();
+        }
 
-        dd($ip, $path, $url);
+        // return redirect()->route('user');
     }
 }
