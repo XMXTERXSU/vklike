@@ -43,7 +43,7 @@ class PostController extends Controller
             2 => __('Вторая категория'),
         ];
 
-        return view('post.index', compact('posts', 'categories  '));
+        return view('post.index', compact('posts', 'categories'));
     }
 
     /**
