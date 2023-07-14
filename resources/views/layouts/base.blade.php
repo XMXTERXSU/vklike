@@ -18,6 +18,8 @@
 <body>
 
     <div class="d-flex flex-column justify-content-between min-vh-100">
+        @include('includes.alert')
+        @include('includes.danger-alert')
         @include('includes.header')
 
 

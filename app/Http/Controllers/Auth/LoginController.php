@@ -7,18 +7,19 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('login.index');
     }
-    public function store(Request $request){
-        // $ip = $request->ip();
-        // $path = $request->path();
-        // $url = $request->url();
+    public function store(Request $request)
+    {
 
-        if (true) {
-            return redirect()->back()->withInput();
-        }
+        alert(__('Успешный вход'), 'success');
 
-        // return redirect()->route('user');
+        // if (true) {
+        //     return redirect()->back()->withInput();
+        // }
+
+        return redirect()->route('user');
     }
 }

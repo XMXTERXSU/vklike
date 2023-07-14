@@ -46,7 +46,7 @@ class PostController extends Controller
         return view('post.index', compact('posts', 'categories'));
     }
 
-    
+
     public function show(string $id)
     {
         $post = (object) [

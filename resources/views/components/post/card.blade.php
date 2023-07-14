@@ -8,7 +8,8 @@
             </h2>
 
             <p class="small text-muted">
-                {{ now()->format('d.m.Y')}}
+                {{-- {{ now()->format('d.m.Y h:i:s')}} --}}
+                {{ now()->toDateTimeString()}}
             </p>
         </div>
     </x-card-body>

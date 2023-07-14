@@ -42,6 +42,8 @@ class UserPostController extends Controller
 
         // dd($data);
 
+        alert(__('Успешно создан'));
+
         return redirect()->route('user.posts.show', 123);
     }
 
@@ -78,13 +80,14 @@ class UserPostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $title = $request->input('title');
-        $content = $request->input('content');
+        // $title = $request->input('title');
+        // $content = $request->input('content');
 
         // dd($data);
 
+        alert(__('Сохранено'));
 
-        return redirect()-back();
+        return redirect()->back();
     }
 
     /**
