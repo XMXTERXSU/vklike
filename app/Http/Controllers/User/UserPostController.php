@@ -42,7 +42,7 @@ class UserPostController extends Controller
 
         // dd($data);
 
-        alert(__('Успешно создан'));
+        alert(__('Успешно создан'), 'success');
 
         return redirect()->route('user.posts.show', 123);
     }
@@ -85,7 +85,7 @@ class UserPostController extends Controller
 
         // dd($data);
 
-        alert(__('Сохранено'));
+        alert(__('Сохранено'), 'success');
 
         return redirect()->back();
     }

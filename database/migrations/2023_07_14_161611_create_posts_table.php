@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->string('title');
+            $table->text('content');
+            $table->unsignedInteger('likes')->default(0);
+
+            $table->foreignId('user_id')->constrained();
+
+            $table->boolean('published')->default(false);
+            $table->timestamp('published_at')->nullable();
+
+
         });
     }
 
