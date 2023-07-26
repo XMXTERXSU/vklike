@@ -38,9 +38,10 @@ class UserPostController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-
-        // dd($data);
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:10000']
+        ]);
 
         alert(__('Успешно создан'), 'success');
 
@@ -95,6 +96,6 @@ class UserPostController extends Controller
      */
     public function destroy(string $id)
     {
-        return redirect()-route('user.posts.index');
+        return redirect() - route('user.posts.index');
     }
 }
