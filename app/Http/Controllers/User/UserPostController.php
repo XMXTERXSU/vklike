@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -40,7 +43,17 @@ class UserPostController extends Controller
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string', 'max:10000']
+            'content' => ['required', 'string', 'max:10000'],
+            'published_at' => ['nullable', 'string', 'date'],
+            'published' => ['nullable', 'boolean'],
+        ]);
+
+        $post = Post::create([
+            'user_id' => User::query()->value('id'),
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'publsihed_at' => new Carbon($validated['publsihed_at'] ?? null),
+            'publsihed' => $validated['publsihed'] ?? false,
         ]);
 
         alert(__('Успешно создан'), 'success');
