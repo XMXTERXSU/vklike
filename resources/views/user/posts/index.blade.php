@@ -24,10 +24,10 @@
                 </h2>
 
                 <div class="small text-muted">
-                    {{ now()->format('d.m.Y')}}
+                    {{ $post->published_at->format('d.m.Y')}}
                 </div>
             </div>
         @endforeach
-
+            {{ $posts->links() }}
     @endif
 @endsection

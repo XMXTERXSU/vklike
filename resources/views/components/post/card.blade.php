@@ -8,8 +8,8 @@
             </h2>
 
             <p class="small text-muted">
-                {{-- {{ now()->format('d.m.Y h:i:s')}} --}}
-                {{ now()->toDateTimeString()}}
+                {{-- {{ now()->format('d..Y h:i:s')}} --}}
+                {{ $post->published_at->diffForHumans() }}
             </p>
         </div>
     </x-card-body>

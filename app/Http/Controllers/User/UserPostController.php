@@ -15,13 +15,7 @@ class UserPostController extends Controller
      */
     public function index(Request $request)
     {
-        $post = (object) [
-            'id' => 123,
-            'title' => 'foo',
-            'content' => 'bar',
-        ];
-
-        $posts = array_fill(0, 10, $post);
+        $posts = Post::paginate(12);
 
         return view('user.posts.index', compact('posts'));
     }

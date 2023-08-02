@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Post;
 
+use App\Models\Post;
 use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,35 +14,27 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $category_id = $request->input('category_id');
-
-        // dd($search, $category_id);
-
-        $post = (object) [
-            'id' => 123,
-            'title' => 'foo',
-            'content' => 'bar',
-            'category_id' => 1,
-        ];
-
-        $posts = array_fill(0, 10, $post);
-
-        $posts = array_filter($posts, function ($post) use ($search, $category_id) {
-            if ($search && !str_contains(strtolower($post->title), strtolower($search))) {
-                return false;
-            }
-            if ($category_id && $post->category_id != $category_id) {
-                return false;
-            }
-            return true;
-        });
-
         $categories = [
             null => __('Все категории'),
             1 => __('Первая категория'),
             2 => __('Вторая категория'),
         ];
+
+        /** @var Post $post */
+        $posts = Post::get(['id', 'title', 'published_at']);
+
+        $validated = $request->validate([
+            'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+        ]);
+
+        $page = $validated['page'] ?? 1;
+        $limit = $validated['limit'] ?? 12;
+        $offset = $limit * ($page - 1);
+
+        $posts = Post::paginate($limit);
+
+        $posts = Post::latest('published_at')->paginate(12);
 
         return view('post.index', compact('posts', 'categories'));
     }
