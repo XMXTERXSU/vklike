@@ -20,33 +20,14 @@ class PostController extends Controller
             2 => __('Вторая категория'),
         ];
 
-        /** @var Post $post */
-        $posts = Post::get(['id', 'title', 'published_at']);
-
-        $validated = $request->validate([
-            'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
-            'page' => ['nullable', 'integer', 'min:1', 'max:100'],
-        ]);
-
-        $page = $validated['page'] ?? 1;
-        $limit = $validated['limit'] ?? 12;
-        $offset = $limit * ($page - 1);
-
-        $posts = Post::paginate($limit);
-
         $posts = Post::latest('published_at')->paginate(12);
 
         return view('post.index', compact('posts', 'categories'));
     }
 
 
-    public function show(string $id)
+    public function show(Post $post)
     {
-        $post = (object) [
-            'id' => 1,
-            'title' => 'foo',
-            'content' => 'bar',
-        ];
         return view('post.show', compact('post'));
     }
 
