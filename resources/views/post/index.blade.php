@@ -9,7 +9,7 @@
 
     @include('post.filter')
 
-    @if (empty($posts))
+    @if ($posts->isEmpty())
         {{ __('Здесь еще нет постов') }}
     @else
         <div class="row">

@@ -1,5 +1,5 @@
 @props(['value' => ''])
-{{ $value }}
+{{-- {{ $value }} --}}
 <input {{ $attributes->class([
     'form-control'
 ])->merge([

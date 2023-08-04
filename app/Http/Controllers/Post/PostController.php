@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Post;
 
+use Carbon\Carbon;
 use App\Models\Post;
-use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostController extends Controller
 {
@@ -14,15 +15,33 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = [
-            null => __('Все категории'),
-            1 => __('Первая категория'),
-            2 => __('Вторая категория'),
-        ];
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:50'],
+            'from_date' => ['nullable', 'string', 'date'],
+            'to_date' => ['nullable', 'string', 'date', 'after:from_date'],
+            'tag' => ['nullable', 'string'],
+        ]);
 
-        $posts = Post::latest('published_at')->paginate(12);
+        $query = Post::query()
+            ->where('published', true)
+            ->whereNotNull('published_at');
 
-        return view('post.index', compact('posts', 'categories'));
+        if ($search = $validated['search'] ?? null) {
+            $query->where('title', 'like', "%{$search}%");
+        }
+        if ($fromDate = $validated['from_date'] ?? null) {
+            $query->where('published_at ', '>=', new Carbon ($fromDate));
+        }
+        if ($toDate = $validated['to_date'] ?? null) {
+            $query->where('published_at ', '>=', new Carbon ($toDate));
+        }
+        if ($tag = $validated['tag'] ?? null) {
+            $query->whereJsonContains('tags', $tag);
+        }
+
+        $posts = $query->latest('published_at')->paginate(12);
+
+        return view('post.index', compact('posts'));
     }
 
 
