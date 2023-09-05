@@ -19,11 +19,10 @@ return new class extends Migration
             $table->text('content');
             $table->unsignedInteger('likes')->default(0);
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
 
             $table->boolean('published')->default(false);
             $table->timestamp('published_at')->nullable();
-
         });
     }
 

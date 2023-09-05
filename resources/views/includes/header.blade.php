@@ -15,30 +15,46 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
                     <li class="nav-item">
-                        <a href="{{ route('posts.index') }}" class="nav-link {{ active_link('posts*')}}" aria-current="page">
+                        <a href="{{ route('posts.index') }}" class="nav-link {{ active_link('posts*') }}"
+                            aria-current="page">
                             {{ __('Посты') }}
                         </a>
                     </li>
 
-                    {{-- <li class="nav-item">
-                        <a href="#" class="nav-link ">
-                            {{ __('Музыка') }}
+                    <li class="nav-item">
+                        <a href="{{ route('groups.index') }}" class="nav-link ">
+                            {{ __('Сообщества') }}
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a href="{{ route('register') }}" class="nav-link {{ active_link('register')}}" aria-current="page">
-                            {{ __('Регистрация') }}
-                        </a>
-                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('register') }}" class="nav-link {{ active_link('register') }}"
+                                aria-current="page">
+                                {{ __('Регистрация') }}
+                            </a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a href="{{ route('login') }}" class="nav-link {{ active_link('login')}}">
-                            {{ __('Вход') }}
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link {{ active_link('login') }}">
+                                {{ __('Вход') }}
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+
+                            <x-form action="{{ route('logout') }}" method="POST">
+                                <x-input-submit type="submit" >
+                                    {{-- {{ __('Выход') }} --}}
+                                </x-button>
+                                {{-- <a href="{{ route('logout') }}" class="nav-link" type="submit">
+                                    {{ __('Выход') }}
+                                </a> --}}
+                            </x-form>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

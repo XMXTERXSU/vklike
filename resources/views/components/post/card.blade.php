@@ -2,7 +2,7 @@
     <x-card-body>
         <div>
             <h2 class="h6">
-                <a href="{{ route('posts.show', $post->id) }}">
+                <a href="{{ route('posts.show', $post->id) }}" class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                     {{ $post->title }}
                 </a>
             </h2>

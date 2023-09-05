@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->json('tags')->nullable();
+        Schema::create('groups', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->string('title');
+            $table->string('description')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable()->constrained();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('tags')->default('[]');
-        });
+        Schema::dropIfExists('groups');
     }
 };

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 class RegisterController extends Controller
 {
     public function index()
@@ -27,6 +28,8 @@ class RegisterController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
+
+        auth('web')->attempt($user);
 
         // if (true) {
         //     return redirect()->back()->withInput();

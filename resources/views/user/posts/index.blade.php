@@ -12,8 +12,8 @@
         </x-slot>
     </x-title>
 
-    @if (empty($posts))
-        {{ __('Здесь еще нет постов') }}
+    @if ($posts->isEmpty())
+        {{ __('У вас еще нет постов') }}
     @else
         @foreach ($posts as $post)
             <div class="mb-3">
@@ -24,7 +24,7 @@
                 </h2>
 
                 <div class="small text-muted">
-                    {{ $post->published_at->format('d.m.Y')}}
+                    {{ $post->published_at?->format('d.m.Y')}}
                 </div>
             </div>
         @endforeach

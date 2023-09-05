@@ -4,7 +4,6 @@
 
 @section('main.content')
     <x-title>
-        {{ __('Ваши посты') }}
         <x-slot name="link">
             <a href="{{route('user.posts.index')}}">
             {{ __("Назад") }}

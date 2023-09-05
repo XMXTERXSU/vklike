@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserPostController extends Controller
+class UserGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $user = $request->user();
+        $groups = Post::paginate(12);
 
-        $posts = Post::where('user_id', $user->id)->paginate(12);
-
-        return view('user.posts.index', compact('posts'));
+        return view('user.group.index', compact('groups'));
     }
 
     /**
@@ -36,32 +36,47 @@ class UserPostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string', 'max:10000'],
+            'published_at' => ['nullable', 'string', 'date'],
+            'published' => ['nullable', 'boolean'],
         ]);
 
         $post = Post::create([
-            'user_id' => $request->user()->id,
+            'user_id' => User::query()->value('id'),
             'title' => $validated['title'],
             'content' => $validated['content'],
+            'publsihed_at' => new Carbon($validated['publsihed_at'] ?? null),
+            'publsihed' => $validated['publsihed'] ?? false,
         ]);
 
         alert(__('Успешно создан'), 'success');
 
-        return redirect()->route('user.posts.show', $post->id);
+        return redirect()->route('user.posts.show', 123);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($post)
     {
+        $post = (object) [
+            'id' => 123,
+            'title' => 'foo',
+            'content' => 'bar',
+        ];
+
         return view('user.posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit($post)
     {
+        $post = (object) [
+            'id' => 123,
+            'title' => 'foo',
+            'content' => 'bar',
+        ];
 
         return view('user.posts.edit', compact('post'));
     }
@@ -71,18 +86,14 @@ class UserPostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // $title = $request->input('title');
+        // $content = $request->input('content');
 
-        $title = $request->input('title');
-        $content = $request->input('content');
-
-        Post::query()->where('id', $id)->update([
-            'title' => $title,
-            'content' => $content,
-        ]);
+        // dd($data);
 
         alert(__('Сохранено'), 'success');
 
-        return back();
+        return redirect()->back();
     }
 
     /**

@@ -30,10 +30,10 @@ class PostController extends Controller
             $query->where('title', 'like', "%{$search}%");
         }
         if ($fromDate = $validated['from_date'] ?? null) {
-            $query->where('published_at ', '>=', new Carbon ($fromDate));
+            $query->where('published_at', '>=', new Carbon ($fromDate));
         }
         if ($toDate = $validated['to_date'] ?? null) {
-            $query->where('published_at ', '>=', new Carbon ($toDate));
+            $query->where('published_at', '>=', new Carbon ($toDate));
         }
         if ($tag = $validated['tag'] ?? null) {
             $query->whereJsonContains('tags', $tag);
@@ -47,6 +47,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        
+
         return view('post.show', compact('post'));
     }
 
