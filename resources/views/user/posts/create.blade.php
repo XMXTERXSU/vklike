@@ -6,7 +6,7 @@
     <x-title>
         {{ __('Создать пост') }}
         <x-slot name="link">
-            <a href="{{ route('user.posts.index') }}">
+            <a href="{{ route('user.profile') }}">
                 {{ __('Назад') }}
             </a>
         </x-slot>

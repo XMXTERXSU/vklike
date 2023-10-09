@@ -4,7 +4,6 @@
 
 @section('auth.content')
     <x-card>
-
         <x-card-header>
             <x-card-title>
                 {{ __('Регистрация') }}
@@ -56,7 +55,7 @@
                 </x-form-item>
 
                 <x-button type="submit">
-                    {{ __('Войти') }}
+                    {{ __('Продолжить') }}
                 </x-button>
             </x-form>
         </x-card-body>

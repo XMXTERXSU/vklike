@@ -1,22 +1,22 @@
 @extends('layouts.main')
 
-@section('page.title', 'Мои посты')
+@section('page.title', $user->name)
 
 @section('main.content')
     <x-title>
-        {{ __('Ваши посты') }}
-        <x-slot name="right">
-            <x-button-link href="{{route('user.posts.create')}}">
-                {{ __('Создать')}}
-            </x-button-link>
-        </x-slot>
+        {{ $user->name }}
     </x-title>
 
     @if ($posts->isEmpty())
-        {{ __('У вас еще нет постов') }}
+        {{ __('У этого пользователя еще нет постов') }}
     @else
-        @foreach ($posts as $post)
-            <div class="mb-3">
+        <div class="row">
+
+            @foreach ($posts as $post)
+                <div class="col-12 col-md-4">
+                    <x-post.card :post="$post" />
+                </div>
+                {{-- <div class="mb-3">
                 <h2 class="h6">
                     <a href="{{route('user.posts.show', $post->id)}}">
                         {{$post->title}}
@@ -26,8 +26,9 @@
                 <div class="small text-muted">
                     {{ $post->published_at?->format('d.m.Y')}}
                 </div>
-            </div>
-        @endforeach
-            {{ $posts->links() }}
+            </div> --}}
+            @endforeach
+        </div>
+        {{ $posts->links() }}
     @endif
 @endsection

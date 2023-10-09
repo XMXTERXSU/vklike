@@ -15,9 +15,9 @@ class UserPostController extends Controller
     {
         $user = $request->user();
 
-        $posts = Post::where('user_id', $user->id)->paginate(12);
+        $posts = Post::where('user_id', $user->id)->latest()->paginate(12);
 
-        return view('user.posts.index', compact('posts'));
+        return view('user.profile.index', compact('posts', 'user'));
     }
 
     /**
@@ -62,7 +62,6 @@ class UserPostController extends Controller
      */
     public function edit(Post $post)
     {
-
         return view('user.posts.edit', compact('post'));
     }
 
@@ -71,18 +70,19 @@ class UserPostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-        $title = $request->input('title');
-        $content = $request->input('content');
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:10000'],
+        ]);
 
         Post::query()->where('id', $id)->update([
-            'title' => $title,
-            'content' => $content,
+            'title' => $validated['title'],
+            'content' => $validated['content'],
         ]);
 
         alert(__('Сохранено'), 'success');
 
-        return back();
+        return redirect()->route('user.posts.show', ['post' => $id]);
     }
 
     /**
@@ -90,6 +90,10 @@ class UserPostController extends Controller
      */
     public function destroy(string $id)
     {
-        return redirect() - route('user.posts.index');
+        Post::where('id', $id)->delete();
+
+        alert(__('Удалено'), 'success');
+
+        return redirect()->route('user.posts.index');
     }
 }

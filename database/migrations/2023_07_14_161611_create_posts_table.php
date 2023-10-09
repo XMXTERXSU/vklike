@@ -21,8 +21,8 @@ return new class extends Migration
 
             $table->foreignId('user_id')->nullable()->constrained();
 
-            $table->boolean('published')->default(false);
-            $table->timestamp('published_at')->nullable();
+            // $table->boolean('published')->default(false);
+            // $table->timestamp('published_at')->nullable();
         });
     }
 

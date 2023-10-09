@@ -23,23 +23,22 @@ class PostController extends Controller
         ]);
 
         $query = Post::query()
-            ->where('published', true)
-            ->whereNotNull('published_at');
+            ->whereNotNull('created_at');
 
         if ($search = $validated['search'] ?? null) {
             $query->where('title', 'like', "%{$search}%");
         }
         if ($fromDate = $validated['from_date'] ?? null) {
-            $query->where('published_at', '>=', new Carbon ($fromDate));
+            $query->where('created_at', '>=', new Carbon ($fromDate));
         }
         if ($toDate = $validated['to_date'] ?? null) {
-            $query->where('published_at', '>=', new Carbon ($toDate));
+            $query->where('created_at', '>=', new Carbon ($toDate));
         }
         if ($tag = $validated['tag'] ?? null) {
             $query->whereJsonContains('tags', $tag);
         }
 
-        $posts = $query->latest('published_at')->paginate(12);
+        $posts = $query->latest('created_at')->paginate(12);
 
         return view('post.index', compact('posts'));
     }
@@ -47,7 +46,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        
+
 
         return view('post.show', compact('post'));
     }

@@ -1,4 +1,4 @@
-<header class="py-3 border-bottom">
+<header class="border-bottom">
     <nav class="navbar navbar-expand-md bg-body-tertiary">
         <div class="container">
 
@@ -44,15 +44,29 @@
                         </li>
                     @else
                         <li class="nav-item">
-
-                            <x-form action="{{ route('logout') }}" method="POST">
-                                <x-input-submit type="submit" >
-                                    {{-- {{ __('Выход') }} --}}
-                                </x-button>
-                                {{-- <a href="{{ route('logout') }}" class="nav-link" type="submit">
-                                    {{ __('Выход') }}
-                                </a> --}}
-                            </x-form>
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <button class="btn dropdown-toggle hidden-arrow" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                            </svg>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a class="dropdown-item" href="{{ route('user.profile') }}">Профиль</a>
+                                            </li>
+                                            <li class="dropdown-item">
+                                                <x-form action="{{ route('logout') }}" method="POST">
+                                                    <x-input-submit class="" type="submit">
+                                                        {{ __('Выход') }}
+                                                    </x-input-submit>
+                                                </x-form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     @endif
                 </ul>

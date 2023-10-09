@@ -22,7 +22,7 @@ class Post extends Model
     protected $fillable = [
         'user_id', 'group_id',
         'title', 'content',
-        'published', 'published_at',
+        // 'published', 'published_at',
     ];
 
     /**
@@ -31,17 +31,17 @@ class Post extends Model
      */
     protected $casts = [
         'user_id' => 'integer',
-        'published' => 'boolean',
-        'published_at' => 'datetime',
+        // 'published' => 'boolean',
+        // 'published_at' => 'datetime',
     ];
 
     /**
      * Summary of isPublished
      * @return bool
      */
-    public function isPublished() : bool
-    {
-        return $this->published
-        && $this->published_at;
-    }
+    // public function isPublished() : bool
+    // {
+    //     return $this->published
+    //     && $this->published_at;
+    // }
 }

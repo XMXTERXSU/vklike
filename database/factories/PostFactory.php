@@ -29,8 +29,8 @@ class PostFactory extends Factory
             'user_id' => User::all()->random()->id,
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
-            'published' => true,
-            'published_at' => fake()->dateTimeBetween(now()->subYear(), now()),
+            // 'published' => true,
+            // 'published_at' => fake()->dateTimeBetween(now()->subYear(), now()),
         ];
     }
 }
