@@ -13,11 +13,9 @@ class UserPostController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
+        $user_id = $request->user()->id;
 
-        $posts = Post::where('user_id', $user->id)->latest()->paginate(12);
-
-        return view('user.profile.index', compact('posts', 'user'));
+        return redirect()->route('profile', compact('user_id'));
     }
 
     /**

@@ -30,7 +30,7 @@ Route::resource('/posts', PostController::class)->only(['index', 'show']);
 
 Route::resource('/groups', GroupController::class)->only(['index', 'show']);
 
-Route::get('/profile/{user_id}', ProfileController::class)->middleware('')->name('user.profile');
+Route::get('/profile/{user_id}', ProfileController::class)->name('profile');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
@@ -42,7 +42,7 @@ Route::middleware('guest')->group(function () {
 
 
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
-    Route::redirect('/', '/user/posts')->name('user');
+    Route::redirect('/', '/user/profile')->name('user');
 
     // Route::resource('posts', UserPostController::class, ['as' => 'user']);
 

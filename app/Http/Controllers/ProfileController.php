@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -17,6 +18,11 @@ class ProfileController extends Controller
         }
         $posts = Post::where('user_id', $user_id)->paginate(12);
 
-        return view('profile.profile', compact(['posts', 'user']));
+        if($user_id == Auth::id()){
+            return view('user.profile.index', compact(['posts', 'user']));
+        } else {
+            return view('profile.profile', compact(['posts', 'user']));
+        }
+
     }
 }
